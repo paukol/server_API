@@ -6,7 +6,8 @@
   "author": "Paulina Kolonczyk <paulinakolonczyk@interia.pl>",
   "license": "MIT",
   "scripts": {
-    "start": "npx nodemon server.js"
+    "start": "npx nodemon server.js",
+    "build": "cd client && yarn install && yarn build"
   },
   "dependencies": {
     "axios": "^0.21.4",

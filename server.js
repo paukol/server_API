@@ -37,8 +37,13 @@ app.use((req, res) => {
   });
 });
 // connects our backend code with the database
-mongoose.connect("mongodb+srv://kolonczykpaulina:joj1FFYf5KmSvRy2@cluster0.06oq9.mongodb.net/NewWaveDB?retryWrites=true&w=majority", {
+const dbURI =
+  process.env.NODE_ENV === "production"
+  ? "mongodb+srv://kolonczykpaulina:joj1FFYf5KmSvRy2@cluster0.06oq9.mongodb.net/NewWaveDB?retryWrites=true&w=majority"
+  : "mongodb://localhost:27017/NewWaveDB";
+mongoose.connect(dbURI, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 const db = mongoose.connection;
 
@@ -57,3 +62,5 @@ const io = socket(server);
 io.on('connection', (socket) => {
   console.log('New socket!', socket.id);
 });
+
+module.exports = server;

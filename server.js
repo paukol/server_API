@@ -37,11 +37,15 @@ app.use((req, res) => {
   });
 });
 // connects our backend code with the database
-const dbURI =
-  process.env.NODE_ENV === "production"
-  ? "mongodb+srv://kolonczykpaulina:joj1FFYf5KmSvRy2@cluster0.06oq9.mongodb.net/NewWaveDB?retryWrites=true&w=majority"
-  : "mongodb://localhost:27017/NewWaveDB";
-mongoose.connect(dbURI, {
+
+const NODE_ENV = process.env.NODE_ENV;
+let dbUri = '';
+
+if(NODE_ENV === 'production') dbUri = 'mongodb://localhost:27017/NewWaveDB';
+else if(NODE_ENV === 'test') dbUri = 'mongodb://localhost:27017/NewWaveDBtest';
+else dbUri = 'mongodb+srv://kolonczykpaulina:joj1FFYf5KmSvRy2@cluster0.06oq9.mongodb.net/NewWaveDB?retryWrites=true&w=majority';
+
+mongoose.connect(dbUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

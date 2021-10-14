@@ -3,6 +3,7 @@ const path = require('path');
 const socket = require('socket.io');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(helmet());
 
 app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);

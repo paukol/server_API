@@ -43,9 +43,9 @@ app.use((req, res) => {
 const NODE_ENV = process.env.NODE_ENV;
 let dbUri = '';
 
-if(NODE_ENV === 'production') dbUri = 'mongodb://localhost:27017/NewWaveDB';
+if(NODE_ENV === 'production') dbUri = 'mongodb+srv://${process.env.GITHUB_USERNAME}:${process.env.OTHER_VAR}@cluster0.06oq9.mongodb.net/NewWaveDB?retryWrites=true&w=majority';
 else if(NODE_ENV === 'test') dbUri = 'mongodb://localhost:27017/NewWaveDBtest';
-else dbUri = 'mongodb+srv://${process.env.GITHUB_USERNAME}:${process.env.OTHER_VAR}@cluster0.06oq9.mongodb.net/NewWaveDB?retryWrites=true&w=majority';
+else dbUri = 'mongodb://localhost:27017/NewWaveDB';
 
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
